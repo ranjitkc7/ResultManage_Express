@@ -1,11 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <h1>Dashboard Page</h1>
-</body>
+  </head>
+  <body>
+    <%- include("header") %>
+    <div class="flex flex-row gap-[12px] h-screen w-full">
+      <section class="w-[50%]">
+        <div class="flex justify-start ml-[2rem]">
+          <div class="h-[33rem] w-[31rem] rounded-md mt-[8px] bg-blue-100">
+            <h1 class="text-2xl text-center mt-[4px]">Enter the Datails</h1>
+            <form action="">
+              <div class="flex flex-row gap-[10px] mt-[10px] justify-between">
+                <div class="mx-[10px] text-[1.1rem]">
+                  <label for="name" class="mt-[20px] text-[1.2rem]"
+                    >Name:
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="border-b-2 border-black outline-none w-[11rem]"
+                  />
+                </div>
+                <div class="mx-[10px] text-[1.1rem]">
+                  <label for="name" class="mt-[20px] text-[1.2rem]"
+                    >Roll No:
+                  </label>
+                  <input
+                    type="number"
+                    name="rollno"
+                    id="rollno"
+                    class="border-b-2 border-black outline-none w-[8rem]"
+                  />
+                </div>
+              </div>
+              <div class="px-[1rem] mt-[10px]"><%- include("tables") %></div>
+              <div class="flex justify-center">
+                <button
+                  type="submit"
+                  class="w-[10rem] h-[2.5rem] text-[1.1rem] font-[600] mt-[12px] bg-yellow-400 rounded-md px-[12px] outline-none"
+                >
+                  Create
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="w-[50%] flex justify-start items-start mt-[8px]">
+        <div
+          class="h-auto w-[31rem] rounded-md text-white bg-slate-700 shadow-lg p-4"
+        >
+          <h1 class="text-[2rem] text-center font-semibold mb-[-4px]">
+            Gradesheet
+          </h1>
+          <h2 class="text-xl text-center font-semibold mb-4">
+            Prithvi Public Secondary School
+          </h2>
+          <div class="flex justify-between font-semibold mb-4">
+            <div class="mx-[10px] flex gap-[10px] flex-row text-[1.1rem]">
+              <label class="text-[1.2rem]">Name:</label>
+              <p id="studentName">Ranjit KC</p>
+            </div>
+            <div class="mx-[10px] flex gap-[10px] flex-row text-[1.1rem]">
+              <label class="text-[1.2rem]">Roll No:</label>
+              <p id="rollNo">21</p>
+            </div>
+          </div>
+          <table class="table-auto w-full text-center border-collapse">
+            <thead>
+              <tr class="bg-gray-800">
+                <th class="border px-3 py-2">Subject</th>
+                <th class="border px-3 py-2">Theory</th>
+                <th class="border px-3 py-2">Practical</th>
+                <th class="border px-3 py-2">Total</th>
+                <th class="border px-3 py-2">Grade</th>
+              </tr>
+            </thead>
+            <tbody id="gradesTableBody" class="text-[1rem]"></tbody>
+          </table>
+          <div class="mt-4 text-right text-[1.1rem] font-semibold">
+            <span>Grand Precentage Average: </span>
+            <span id="finalTotal">0</span>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script></script>
+  </body>
 </html>

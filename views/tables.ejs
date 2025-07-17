@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Grade Table</title>
+    <script src="/js/marks.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-gray-100 p-4">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-bold mb-4 text-center text-blue-700">Student Grade Table</h2>
+      <table class="table-auto w-full border border-gray-300">
+        <thead>
+          <tr class="bg-blue-500 text-center text-white">
+            <th class="border px-4 py-2">Subjects</th>
+            <th class="border px-4 py-2">Theory</th>
+            <th class="border px-4 py-2">Practical</th>
+            <th class="border px-4 py-2">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% const subjects = ['english', 'nepali', 'math', 'physics', 'chemistry', 'biology']; %>
+          <% const subjectNames = { english: 'Com.English', nepali: 'Com.Nepali', math: 'Com.Math', physics: 'Physics', chemistry: 'Chemistry', biology: 'Biology' }; %>
+
+          <% subjects.forEach(subject => { %>
+          <tr class="text-center">
+            <td class="border px-4 py-2 text-[1.1rem] font-medium"><%= subjectNames[subject] %></td>
+            <td class="border px-4 py-2">
+              <input
+                type="number"
+                data-subject="<%= subject %>"
+                data-type="theory"
+                class="mark-input w-full border-b-2 outline-none text-center px-2 py-1"
+              />
+            </td>
+            <td class="border px-4 py-2">
+              <input
+                type="number"
+                data-subject="<%= subject %>"
+                data-type="practical"
+                class="mark-input w-full border-b-2 outline-none text-center px-2 py-1"
+              />
+            </td>
+            <td class="border px-4 py-2">
+              <input
+                type="number"
+                id="total-<%= subject %>"
+                class="w-full border-b-2 outline-none text-center px-2 py-1 bg-gray-100"
+                readonly
+              />
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
