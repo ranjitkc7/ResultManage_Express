@@ -16,6 +16,29 @@ document.addEventListener("DOMContentLoaded", () => {
     chemistry: "Chemistry",
     biology: "Biology",
   };
+  
+  subjects.forEach((subject) => {
+    ["theory", "practical"].forEach((type) => {
+      const input = document.querySelector(
+        `input[data-subject="${subject}"][data-type="${type}"]`
+      );
+      input.addEventListener("input", () => {
+        const theory =
+          parseFloat(
+            document.querySelector(
+              `input[data-subject="${subject}"][data-type="theory"]`
+            ).value
+          ) || 0;
+        const practical =
+          parseFloat(
+            document.querySelector(
+              `input[data-subject="${subject}"][data-type="practical"]`
+            ).value
+          ) || 0;
+        document.getElementById(`total-${subject}`).value = theory + practical;
+      });
+    });
+  });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -46,10 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ) || 0;
       const total = theory + practical;
 
-      // Calculate grade
-      const grade = getGrade(total);
-
       grandTotal += total;
+      const grade = getGrade(total);
 
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -62,9 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
       tbody.appendChild(row);
     });
 
-    const finalPercentage = (grandTotal / (subjects.length * 100)) * 100;
+    const finalPercentage = ((grandTotal / (subjects.length * 100)) * 100) / 25;
     document.getElementById("finalTotal").textContent =
       finalPercentage.toFixed(2);
+
+    form.reset();
+
+    subjects.forEach((subject) => {
+      document.getElementById(`total-${subject}`).value = "";
+    });
   });
 
   function getGrade(total) {
