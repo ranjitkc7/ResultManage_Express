@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     chemistry: "Chemistry",
     biology: "Biology",
   };
-  
+
+  // Add input listeners for theory/practical to update total fields
   subjects.forEach((subject) => {
     ["theory", "practical"].forEach((type) => {
       const input = document.querySelector(
@@ -40,12 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const rollno = document.getElementById("rollno").value;
+    const name = document.getElementById("name").value.trim();
+    const rollno = document.getElementById("rollno").value.trim();
 
+    // Show student info immediately
     document.getElementById("studentName").textContent = name;
     document.getElementById("rollNo").textContent = rollno;
 
@@ -53,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tbody.innerHTML = "";
 
     let grandTotal = 0;
+    const marks = {};
 
     subjects.forEach((subject) => {
       const theory =
@@ -70,8 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const total = theory + practical;
 
       grandTotal += total;
-      const grade = getGrade(total);
+      marks[subject] = total;
 
+      const grade = getGrade(total);
       const row = document.createElement("tr");
       row.innerHTML = `
         <td class="border px-3 py-2">${subjectNames[subject]}</td>
@@ -87,11 +91,37 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("finalTotal").textContent =
       finalPercentage.toFixed(2);
 
-    form.reset();
+    try {
+      const response = await fetch("/submit-marks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, rollno, ...marks }),
+      });
 
-    subjects.forEach((subject) => {
-      document.getElementById(`total-${subject}`).value = "";
-    });
+      if (!response.ok) throw new Error("Server error!");
+
+      const result = await response.json();
+      console.log("Server response:", result);
+
+      alert("Marksheet submitted successfully!");
+
+      // Reset the form inputs (name, rollno, theory/practical)
+      form.reset();
+
+      // Clear total fields
+      subjects.forEach((subject) => {
+        document.getElementById(`total-${subject}`).value = "";
+      });
+
+      // Clear displayed student info and grades table
+      document.getElementById("studentName").textContent = "";
+      document.getElementById("rollNo").textContent = "";
+      document.getElementById("finalTotal").textContent = "";
+      tbody.innerHTML = "";
+    } catch (error) {
+      console.error("Error sending data:", error.message);
+      alert("Failed to submit marksheet. Please try again.");
+    }
   });
 
   function getGrade(total) {

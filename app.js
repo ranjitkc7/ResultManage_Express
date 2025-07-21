@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import { authRouter } from "./routes/authRouter.js";
 import { dashboardRouter } from "./routes/dashboardRouter.js";
+import { markRouter } from "./routes/markRouter.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.set("view engine", "ejs");
 
 app.use("/", authRouter);
 app.use("/", dashboardRouter);
+app.use("/", markRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

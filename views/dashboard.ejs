@@ -5,22 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body>
+  <body class="relative h-screen w-full">
     <%- include("header") %>
     <div class="flex flex-row gap-[12px] h-screen w-full">
       <section class="w-[50%]">
         <div class="flex justify-start ml-[2rem]">
           <div class="h-[33rem] w-[31rem] rounded-md mt-[8px] bg-blue-100">
             <h1 class="text-2xl text-center mt-[4px]">Enter the Datails</h1>
-            <form action="" id="marksForm">
+            <form action="/submit-marks" method="POST" id="marksForm">
               <div class="flex flex-row gap-[10px] mt-[10px] justify-between">
                 <div class="mx-[10px] text-[1.1rem]">
-                  <label for="name" class="mt-[20px] text-[1.2rem]">Name:</label>
-                  <input type="text" name="name" id="name" class="border-b-2 border-black outline-none w-[11rem]" />
+                  <label for="name" class="mt-[20px] text-[1.2rem]"
+                    >Name:</label
+                  >
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="border-b-2 border-black outline-none w-[11rem]"
+                  />
                 </div>
                 <div class="mx-[10px] text-[1.1rem]">
-                  <label for="rollno" class="mt-[20px] text-[1.2rem]">Roll No:</label>
-                  <input type="number" name="rollno" id="rollno" class="border-b-2 border-black outline-none w-[8rem]" />
+                  <label for="rollno" class="mt-[20px] text-[1.2rem]"
+                    >Roll No:</label
+                  >
+                  <input
+                    type="number"
+                    name="rollno"
+                    id="rollno"
+                    class="border-b-2 border-black outline-none w-[8rem]"
+                  />
                 </div>
               </div>
               <div class="px-[1rem] mt-[10px]"><%- include("tables") %></div>
@@ -38,9 +52,15 @@
       </section>
 
       <section class="w-[50%] flex justify-start items-start mt-[8px]">
-        <div class="h-auto w-[31rem] rounded-md text-white bg-slate-700 shadow-lg p-4">
-          <h1 class="text-[2rem] text-center font-semibold mb-[-4px]">Gradesheet</h1>
-          <h2 class="text-xl text-center font-semibold mb-4">Prithvi Public Secondary School</h2>
+        <div
+          class="h-auto w-[31rem] rounded-md text-white bg-slate-700 shadow-lg p-4"
+        >
+          <h1 class="text-[2rem] text-center font-semibold mb-[-4px]">
+            Gradesheet
+          </h1>
+          <h2 class="text-xl text-center font-semibold mb-4">
+            Prithvi Public Secondary School
+          </h2>
           <div class="flex justify-between font-semibold mb-4">
             <div class="mx-[10px] flex gap-[10px] flex-row text-[1.1rem]">
               <label class="text-[1.2rem]">Name:</label>
@@ -48,7 +68,7 @@
             </div>
             <div class="mx-[10px] flex gap-[10px] flex-row text-[1.1rem]">
               <label class="text-[1.2rem]">Roll No:</label>
-              <p id="rollNo"> </p>
+              <p id="rollNo"></p>
             </div>
           </div>
           <table class="table-auto w-full text-center border-collapse">
@@ -69,6 +89,11 @@
           </div>
         </div>
       </section>
+      <div
+        class="flex absolute items-center justify-center top-0 left-0 h-[3rem] w-[3rem] rounded-full bg-yellow-400"
+      >
+        <a href="/"><p class="font-[600]">Back</p></a>
+      </div>
     </div>
     <script src="/js/marksheet.js"></script>
   </body>
