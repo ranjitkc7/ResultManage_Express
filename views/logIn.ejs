@@ -31,16 +31,27 @@
               placeholder="Enter your password"
               class="w-full h-[2.5rem] text-[1.1rem] bg-white mt-[12px] rounded-md px-[12px] outline-none"
             />
-            
             <button
               type="submit"
               class="w-full h-[2.5rem] text-[1.2rem] font-[600] mt-[12px] bg-yellow-400 rounded-md px-[12px] outline-none"
             >
               Login
             </button>
+            <div>
+              <% if (error) { %>
+              <div
+                id="errorMessage"
+                class="text-red-500 bg-red-50 mt-[4px] p-2 text-center rounded-md"
+              >
+                <%= error %>
+              </div>
+              <% } %>
+            </div>
             <div class="flex justify-center gap-[12px] mt-[10px] text-[1.1rem]">
-                <p>If already haven't an account.</p>
-                <a class="text-white font-[700] text-[1.2rem]" href="/">Sign Up</a>
+              <p>If already haven't an account.</p>
+              <a class="text-white font-[700] text-[1.2rem]" href="/"
+                >Sign Up</a
+              >
             </div>
           </form>
         </div>
@@ -54,4 +65,14 @@
       </section>
     </div>
   </body>
+  <script>
+    setTimeout(() => {
+      const errorDiv = document.getElementById("errorMessage");
+      if (errorDiv) {
+        errorDiv.style.transition = "opacity 0.5s ease";
+        errorDiv.style.opacity = "0";
+        setTimeout(() => errorDiv.remove(), 500);
+      }
+    }, 3000);
+  </script>
 </html>

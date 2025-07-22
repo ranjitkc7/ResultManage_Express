@@ -21,7 +21,7 @@
           <form
             action="/signUp"
             method="POST"
-            class="h-[55%] w-[70%] bg-blue-500 p-[0.8rem] rounded-md"
+            class="h-[62%] w-[70%] bg-blue-500 p-[0.8rem] rounded-md"
           >
             <h1 class="text-2xl text-center mb-[12px] text-white font-[600]">
               SignUp Form
@@ -56,13 +56,35 @@
             >
               SignUp
             </button>
+            <div>
+              <% if (error) { %>
+              <div
+                id="errorMessage"
+                class=" text-red-500 bg-red-50 mt-[4px] p-2 text-center rounded-md"
+              >
+                <%= error %>
+              </div>
+              <% } %>
+            </div>
             <div class="flex justify-center gap-[12px] mt-[10px] text-[1.1rem]">
-                <p>If already have a account.</p>
-                <a class="text-white font-[700] text-[1.2rem]" href="/logIn">LogIn</a>
+              <p>If already have a account.</p>
+              <a class="text-white font-[700] text-[1.2rem]" href="/logIn"
+                >LogIn</a
+              >
             </div>
           </form>
         </div>
       </section>
     </div>
   </body>
+  <script>
+    setTimeout(() => {
+      const errorDiv = document.getElementById("errorMessage");
+      if (errorDiv) {
+        errorDiv.style.transition = "opacity 0.5s ease";
+        errorDiv.style.opacity = "0";
+        setTimeout(() => errorDiv.remove(), 500);
+      }
+    }, 3000);
+  </script>
 </html>
