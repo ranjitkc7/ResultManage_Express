@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     biology: "Biology",
   };
 
-  // Add input listeners for theory/practical to update total fields
   subjects.forEach((subject) => {
     ["theory", "practical"].forEach((type) => {
       const input = document.querySelector(
@@ -47,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const name = document.getElementById("name").value.trim();
     const rollno = document.getElementById("rollno").value.trim();
 
-    // Show student info immediately
     document.getElementById("studentName").textContent = name;
     document.getElementById("rollNo").textContent = rollno;
 
@@ -78,13 +76,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const grade = getGrade(total);
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td class="border px-3 py-2">${subjectNames[subject]}</td>
-        <td class="border px-3 py-2">${theory}</td>
-        <td class="border px-3 py-2">${practical}</td>
-        <td class="border px-3 py-2">${total}</td>
-        <td class="border px-3 py-2">${grade}</td>
+        <td class="border border-black px-3 py-2">${subjectNames[subject]}</td>
+        <td class="border border-black px-3 py-2">${theory}</td>
+        <td class="border border-black px-3 py-2">${practical}</td>
+        <td class="border border-black px-3 py-2">${total}</td>
+        <td class="border border-black px-3 py-2">${grade}</td>
       `;
       tbody.appendChild(row);
+      tbody.style.backgroundColor = "#324b4b";
     });
 
     const finalPercentage = ((grandTotal / (subjects.length * 100)) * 100) / 25;
@@ -104,23 +103,18 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Server response:", result);
 
       alert("Marksheet submitted successfully!");
-
-      // Reset the form inputs (name, rollno, theory/practical)
       form.reset();
 
-      // Clear total fields
       subjects.forEach((subject) => {
         document.getElementById(`total-${subject}`).value = "";
       });
-
-      // Clear displayed student info and grades table
       document.getElementById("studentName").textContent = "";
       document.getElementById("rollNo").textContent = "";
       document.getElementById("finalTotal").textContent = "";
       tbody.innerHTML = "";
     } catch (error) {
       console.error("Error sending data:", error.message);
-      alert("Failed to submit marksheet. Please try again.");
+  
     }
   });
 
